@@ -54,3 +54,12 @@ function verifyLogin(array $users, string $username, string $password): ?array
 
   return $user;
 }
+
+function requireLogin(): void
+{
+
+  if (!isset($_SESSION['user_id'])) {
+    header('Location: login.php');
+    exit;
+  }
+}
