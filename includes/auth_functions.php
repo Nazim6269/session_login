@@ -39,6 +39,14 @@ function findUserByUserName(array $users, string $username): ?array
   return null;
 }
 
+function requireLogin(): void
+{
+    if (!isset($_SESSION['user_id'])) {
+        header('Location: login.php');
+        exit;
+    }
+}
+
 function verifyLogin(array $users, string $username, string $password): ?array
 {
   $user = findUserByUserName($users, $username);
@@ -53,13 +61,4 @@ function verifyLogin(array $users, string $username, string $password): ?array
 
 
   return $user;
-}
-
-function requireLogin(): void
-{
-
-  if (!isset($_SESSION['user_id'])) {
-    header('Location: login.php');
-    exit;
-  }
 }
